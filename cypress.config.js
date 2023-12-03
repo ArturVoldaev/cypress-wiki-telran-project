@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const logger = require("cypress-terminal-report/src/installLogsPrinter")
 
 
 module.exports = defineConfig({
@@ -12,6 +13,7 @@ module.exports = defineConfig({
   },
 
   e2e: {
+    baseUrl: "http://wiki.telran-edu.de:8989",
     setupNodeEvents(on, config) {
       const options = {
         outputRoot: config.projectRoot + "/logs/",
@@ -20,13 +22,13 @@ module.exports = defineConfig({
         },
       };
 
-      require("cypress-terminal-report/src/installLogsPrinter")(on, options);
+      logger(on, options);
 
       //return require("./cypress/plugins/index")(on, config)
 
       return config;
     },
-    baseUrl: "http://wiki.telran-edu.de:8989",
+    
 
     env: {
       URL: "http://wiki.telran-edu.de:8989",

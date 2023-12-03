@@ -41,7 +41,12 @@ describe("API-Test", () => {
           format: "json",
           titles: `${user.pageTitle}`,
         },
-      }).then((response) => {
+      })
+
+     
+      .then((response) => {
+        console.log(response);
+        expect(response).to.have.property('status')
         expect(response.status).to.eq(200);
         expect(response.body.query.pages[Cypress.env("pageID")].title).to.eq(
           `${user.pageTitle}`

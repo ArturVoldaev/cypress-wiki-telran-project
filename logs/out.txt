@@ -1,0 +1,18 @@
+cypress\e2e\api\crud.cy.js:
+    API-Test -> POSITIVE TESTS -> read-page-api-test 
+        cy:request (K): GET /api.php
+                        Status: 200
+                        Response body: {
+                          "batchcomplete": "",
+                          "query": {
+                            "pages": {
+                              "215": {
+                                "pageid": 215,
+                                "ns": 0,
+                                "title": "Awesome Granite Bacon"
+                              }
+                            }
+                          }
+                        }
+        cy:command (X): wait	@posts
+
