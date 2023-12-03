@@ -13,18 +13,11 @@ describe("API-Test", () => {
   // cy.wait(5000)
   //   })
   context("POSITIVE TESTS", () => {
-    it("create-page-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "edit",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText}`,
-          token: "+\\",
-        },
+    it("create-page-positive-api-test ", () => {
+      cy.crudPattern({
+        action: "edit",
+        title: `${user.pageTitle}`,
+        text: `${user.pageText}`,
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
@@ -33,20 +26,11 @@ describe("API-Test", () => {
     });
 
     it("read-page-api-test ", () => {
-      cy.request({
-        method: "GET",
-        url: Cypress.env("SEND_API"),
-        qs: {
-          action: "query",
-          format: "json",
-          titles: `${user.pageTitle}`,
-        },
-      })
-
-     
-      .then((response) => {
-        console.log(response);
-        expect(response).to.have.property('status')
+      cy.crudPattern({
+        action: "query",
+        title: `${user.pageTitle}`,
+      }).then((response) => {
+        expect(response).to.have.property("status");
         expect(response.status).to.eq(200);
         expect(response.body.query.pages[Cypress.env("pageID")].title).to.eq(
           `${user.pageTitle}`
@@ -55,18 +39,10 @@ describe("API-Test", () => {
     });
 
     it("update-page-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "edit",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText} ${user.newPageText}`,
-          token: "+\\",
-          formatversion: "latest",
-        },
+      cy.crudPattern({
+        action: "edit",
+        title: `${user.pageTitle}`,
+        text: `${user.pageText} ${user.newPageText}`,
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
@@ -74,24 +50,16 @@ describe("API-Test", () => {
       });
     });
 
-    // it("delete-page-api-test ", () => {
-    //   cy.request({
-    //     method: "POST",
-    //     form: true,
-    //     url: "http://wiki.telran-edu.de:8989/api.php",
-    //     body: {
-    //       action: "delete",
-    //       format: "json",
-    //       title: "Investigator",
-    //       token: "tuf4i7hehidshp9fhfnlrtql2qr9s9ue+\\",
-    //       deleteglobalaccounttoken: "+\\",
-    //       formatversion: "2",
-    //     },
-    //   }).then((res) => {
-    //     cy.wait(1000);
-    //     console.log(res);
-    //   });
-    // });
+    it("delete-page-api-test ", () => {
+      cy.crudPattern({
+        action: "delete",
+        title: `${user.pageTitle}`,
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.statusText).to.eq("OK");
+        expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
+      });
+    });
 
     it("block-user-api-test ", () => {
       cy.request({
@@ -102,13 +70,12 @@ describe("API-Test", () => {
           action: "block",
           format: "json",
           user: Cypress.env("LOGIN"),
-          token: "bfbfb5ffeac9679d104c7f79a6c7eb62656bca93+\\",
+          token: "+\\",
           formatversion: "2",
         },
       }).then((response) => {
-        console.log(response);
         expect(response.status).to.eq(200);
-        expect(response.body.error.code).to.eq("badtoken");
+        expect(response.body.error.code).to.eq("permissiondenied");
       });
     });
 
@@ -125,7 +92,6 @@ describe("API-Test", () => {
           formatversion: "2",
         },
       }).then((response) => {
-        console.log(response);
         expect(response.status).to.eq(200);
         expect(response.body.parse.title).to.eq(`${user.pageTitle}`);
       });
@@ -133,21 +99,15 @@ describe("API-Test", () => {
   });
 
   context("NEGATIVE TEST", () => {
-    it("create-page-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "edit",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText}`,
-          token: "+\\",
-        },
+    it("create-page-negative-api-test ", () => {
+      cy.crudPattern({
+        action: "edit",
+        title: '',
+        text: '',
+        token: null
       }).then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
+        expect(response.body.error.code).to.eq('invalidtitle');
       });
     });
 
@@ -188,24 +148,21 @@ describe("API-Test", () => {
       });
     });
 
-    // it("delete-page-api-test ", () => {
-    //   cy.request({
-    //     method: "POST",
-    //     form: true,
-    //     url: "http://wiki.telran-edu.de:8989/api.php",
-    //     body: {
-    //       action: "delete",
-    //       format: "json",
-    //       title: "Investigator",
-    //       token: "tuf4i7hehidshp9fhfnlrtql2qr9s9ue+\\",
-    //       deleteglobalaccounttoken: "+\\",
-    //       formatversion: "2",
-    //     },
-    //   }).then((res) => {
-    //     cy.wait(1000);
-    //     console.log(res);
-    //   });
-    // });
+    it("delete-page-api-test ", () => {
+      cy.request({
+        method: "POST",
+        form: true,
+        url: Cypress.env("SEND_API"),
+        body: {
+          action: "delete",
+          format: "json",
+        },
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.error.code).to.eq("missingparam");
+        expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
+      });
+    });
 
     it("parse-page-negative-api-test", () => {
       cy.request({
@@ -221,7 +178,6 @@ describe("API-Test", () => {
           formatversion: "2",
         },
       }).then((response) => {
-        console.log(response);
         expect(response.status).to.eq(200);
         expect(response.body.error.code).to.eq("invalidparammix");
       });

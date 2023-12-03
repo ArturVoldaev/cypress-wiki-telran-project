@@ -1,18 +1,16 @@
-cypress\e2e\api\crud.cy.js:
-    API-Test -> POSITIVE TESTS -> read-page-api-test 
-        cy:request (K): GET /api.php
+cypress\e2e\api\crud-pattern-test.cy.js:
+    API-Test -> NEGATIVE TEST -> create-page-negative-api-test 
+        cy:request (K): POST /api.php
                         Status: 200
                         Response body: {
-                          "batchcomplete": "",
-                          "query": {
-                            "pages": {
-                              "215": {
-                                "pageid": 215,
-                                "ns": 0,
-                                "title": "Awesome Granite Bacon"
-                              }
-                            }
+                          "error": {
+                            "code": "invalidtitle",
+                            "info": "Bad title \"\".",
+                            "*": "See http://wiki.telran-edu.de:8989/api.php for API usage. Subscribe to the mediawiki-api-announce mailing list at &lt;https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/&gt; for notice of API deprecations and breaking changes."
                           }
                         }
-        cy:command (X): wait	@posts
+        cy:command (K): assert	expected **200** to equal **200**
+                        Actual: 	200
+                        Expected: 	200
+        cy:command (X): then	function(){}
 

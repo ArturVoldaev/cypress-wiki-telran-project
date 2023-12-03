@@ -35,6 +35,7 @@ module.exports = defineConfig({
       LOGIN: "Papatester",
       PASSWORD: "PapatesterPapatester",
       SEND_API: "/api.php",
+      SPEED_RESPONSE: 600,
       //allure
       projectRoot: "/logs/",
     },
