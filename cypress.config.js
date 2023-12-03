@@ -26,6 +26,7 @@ module.exports = defineConfig({
 
       return config;
     },
+    baseUrl: "http://wiki.telran-edu.de:8989",
 
     env: {
       URL: "http://wiki.telran-edu.de:8989",

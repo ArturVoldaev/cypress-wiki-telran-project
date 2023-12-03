@@ -17,7 +17,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "edit",
           format: "json",
@@ -35,7 +35,7 @@ describe("API-Test", () => {
     it("read-page-api-test ", () => {
       cy.request({
         method: "GET",
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         qs: {
           action: "query",
           format: "json",
@@ -53,7 +53,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "edit",
           format: "json",
@@ -92,7 +92,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "block",
           format: "json",
@@ -111,7 +111,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "parse",
           format: "json",
@@ -132,7 +132,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "edit",
           format: "json",
@@ -149,7 +149,7 @@ describe("API-Test", () => {
     it("read-page-api-test ", () => {
       cy.request({
         method: "GET",
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         qs: {
           action: "query",
           format: "json",
@@ -167,7 +167,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "edit",
           format: "json",
@@ -206,7 +206,7 @@ describe("API-Test", () => {
       cy.request({
         method: "POST",
         form: true,
-        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        url: Cypress.env("SEND_API"),
         body: {
           action: "parse",
           format: "json",
