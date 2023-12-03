@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker');
+const { faker } = require("@faker-js/faker");
 
 module.exports = {
   pageTitle: faker.commerce.productName(),
@@ -8,4 +8,5 @@ module.exports = {
   pageSummaru: faker.lorem.sentence(),
   fullName: faker.person.fullName(),
   phoneNumber: faker.phone.number(),
-}
+  indianSymbols: "एक जल्दी भूरी लोमड़ी आलसी कुत्ते पर कूदता",
+};

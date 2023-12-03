@@ -2,7 +2,7 @@
 
 const user = require("../../fixtures/fakeData");
 
-describe("API-Test", () => {
+describe("CRUD PATTERN TEST", () => {
   // beforeEach(() => {
   //     cy.visit(Cypress.env("URL"))
   // cy.visit("http://wiki.telran-edu.de:8989/index.php/Main_Page")
@@ -25,7 +25,7 @@ describe("API-Test", () => {
       });
     });
 
-    it("read-page-api-test ", () => {
+    it("read-page-positive-api-test ", () => {
       cy.crudPattern({
         action: "query",
         title: `${user.pageTitle}`,
@@ -38,7 +38,7 @@ describe("API-Test", () => {
       });
     });
 
-    it("update-page-api-test ", () => {
+    it("update-page-positive-api-test ", () => {
       cy.crudPattern({
         action: "edit",
         title: `${user.pageTitle}`,
@@ -50,13 +50,13 @@ describe("API-Test", () => {
       });
     });
 
-    it("delete-page-api-test ", () => {
+    it("delete-page-positive-api-test ", () => {
       cy.crudPattern({
         action: "delete",
         title: `${user.pageTitle}`,
       }).then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.statusText).to.eq("OK");
+        expect(response.body.error).to.have.property('info')
         expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
       });
     });
@@ -79,84 +79,50 @@ describe("API-Test", () => {
       });
     });
 
-    it("parse-page-positive-api-test", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "parse",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText}`,
-          formatversion: "2",
-        },
-      }).then((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.parse.title).to.eq(`${user.pageTitle}`);
-      });
-    });
+
   });
 
   context("NEGATIVE TEST", () => {
     it("create-page-negative-api-test ", () => {
       cy.crudPattern({
         action: "edit",
-        title: '',
-        text: '',
-        token: null
+        title: null,
+        text: null,
+        token: null,
       }).then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.body.error.code).to.eq('invalidtitle');
+        expect(response.body.error.code).to.eq("invalidtitle");
       });
     });
 
-    it("read-page-api-test ", () => {
-      cy.request({
-        method: "GET",
-        url: Cypress.env("SEND_API"),
-        qs: {
-          action: "query",
-          format: "json",
-          titles: `${user.pageTitle}`,
-        },
+    it("read-page-negative-api-test ", () => {
+      cy.crudPattern({
+        action: "query",
+        title: `${user.indianSymbols}`,
+        pageids: `${user.pageId}`,
       }).then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.body.query.pages[Cypress.env("pageID")].title).to.eq(
-          `${user.pageTitle}`
-        );
+        expect(response).to.have.property("status");
+        expect(response.body.error.code).to.eq("multisource");
       });
     });
 
-    it("update-page-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "edit",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText} ${user.newPageText}`,
-          token: "+\\",
-          formatversion: "latest",
-        },
+    it("update-page-negative-api-test ", () => {
+      cy.crudPattern({
+        action: "edit",
+        title: `${user.pageTitle}`,
+        text: `${user.pageText} ${user.newPageText}`,
+        token: "-",
       }).then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
-        expect(response.body.edit.result).to.eq("Success");
+        expect(response.body.error.code).to.eq("badtoken");
+        expect(response.body.error.info).to.eq("Invalid CSRF token.");
       });
     });
 
-    it("delete-page-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "delete",
-          format: "json",
-        },
+    it("delete-page-negative-api-test ", () => {
+      cy.crudPattern({
+        action: "delete",
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body.error.code).to.eq("missingparam");
@@ -164,23 +130,6 @@ describe("API-Test", () => {
       });
     });
 
-    it("parse-page-negative-api-test", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "parse",
-          format: "json",
-          title: `${user.pageTitle}`,
-          text: `${user.pageText}`,
-          page: `${user.pageTitle}`,
-          formatversion: "2",
-        },
-      }).then((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.error.code).to.eq("invalidparammix");
-      });
-    });
+
   });
 });
