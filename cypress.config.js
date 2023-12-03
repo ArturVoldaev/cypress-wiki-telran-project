@@ -29,6 +29,8 @@ module.exports = defineConfig({
 
     env: {
       URL: "http://wiki.telran-edu.de:8989",
+      LOGIN: "Papatester",
+      PASSWORD: "PapatesterPapatester",
       SEND_API: "/api.php",
       //allure
       projectRoot: "/logs/",

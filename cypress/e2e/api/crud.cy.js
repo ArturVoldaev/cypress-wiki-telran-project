@@ -87,7 +87,46 @@ describe("API-Test", () => {
     //     console.log(res);
     //   });
     // });
+
+    it("block-user-api-test ", () => {
+      cy.request({
+        method: "POST",
+        form: true,
+        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        body: {
+          action: "block",
+          format: "json",
+          user: Cypress.env("LOGIN"),
+          token: "bfbfb5ffeac9679d104c7f79a6c7eb62656bca93+\\",
+          formatversion: "2",
+        },
+      }).then((response) => {
+        console.log(response);
+        expect(response.status).to.eq(200);
+        expect(response.body.error.code).to.eq("badtoken");
+      });
+    });
+
+    it("parse-page-positive-api-test", () => {
+      cy.request({
+        method: "POST",
+        form: true,
+        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        body: {
+          action: "parse",
+          format: "json",
+          title: `${user.pageTitle}`,
+          text: `${user.pageText}`,
+          formatversion: "2",
+        },
+      }).then((response) => {
+        console.log(response);
+        expect(response.status).to.eq(200);
+        expect(response.body.parse.title).to.eq(`${user.pageTitle}`);
+      });
+    });
   });
+
   context("NEGATIVE TEST", () => {
     it("create-page-api-test ", () => {
       cy.request({
@@ -104,7 +143,6 @@ describe("API-Test", () => {
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
-        Cypress.env("pageID", response.body.edit.pageid);
       });
     });
 
@@ -163,5 +201,25 @@ describe("API-Test", () => {
     //     console.log(res);
     //   });
     // });
+
+    it("parse-page-negative-api-test", () => {
+      cy.request({
+        method: "POST",
+        form: true,
+        url: Cypress.env("URL") + Cypress.env("SEND_API"),
+        body: {
+          action: "parse",
+          format: "json",
+          title: `${user.pageTitle}`,
+          text: `${user.pageText}`,
+          page: `${user.pageTitle}`,
+          formatversion: "2",
+        },
+      }).then((response) => {
+        console.log(response);
+        expect(response.status).to.eq(200);
+        expect(response.body.error.code).to.eq("invalidparammix");
+      });
+    });
   });
 });
