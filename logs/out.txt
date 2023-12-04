@@ -1,0 +1,21 @@
+cypress/e2e/api/crud-pattern-test.cy.js:
+    CRUD PATTERN TEST -> NEGATIVE TEST -> delete-page-negative-api-test 
+        cy:request (K): POST /api.php
+                        Status: 200
+                        Response body: {
+                          "error": {
+                            "code": "missingparam",
+                            "info": "One of the parameters \"title\" and \"pageid\" is required.",
+                            "*": "See http://wiki.telran-edu.de:8989/api.php for API usage. Subscribe to the mediawiki-api-announce mailing list at &lt;https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/&gt; for notice of API deprecations and breaking changes."
+                          }
+                        }
+        cy:command (K): assert	expected **200** to equal **200**
+                        Actual: 	200
+                        Expected: 	200
+        cy:command (K): assert	expected **missingparam** to equal **missingparam**
+                        Actual: 	"missingparam"
+                        Expected: 	"missingparam"
+        cy:command (X): assert	expected **659** to be below **600**
+                        Actual: 	659
+                        Expected: 	600
+
