@@ -12,7 +12,7 @@
     "del-cli": "^5.1.0"
   },
   "scripts": {
-    "start": "npx cypress run --reporter mochawesome",
+    "start": "npx cypress run --reporter mochawesome --headless",
     "open-report": "npx marge mochawesome.json --autoOpen --overwrite",
     "merge-json": "npx mochawesome-merge 'cypress/results/*.json' -o mochawesome.json",
     "remove-old-report": "del-cli ./cypress/results && del-cli mochawesome.json && del-cli mochawesome-report",
