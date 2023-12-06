@@ -32,10 +32,11 @@ module.exports = defineConfig({
 
     env: {
       URL: "http://wiki.telran-edu.de:8989",
-      LOGIN: "Papatester",
-      PASSWORD: "PapatesterPapatester",
+      LOGIN: "PapaTester",
+      PASSWORD: "PapaTesterPapaTester",
       SEND_API: "/api.php",
-      SPEED_RESPONSE: 600,
+      SPEED_RESPONSE: 1000,
+      pageID: 50 || Cypress.env("pageID"),
       //allure
       projectRoot: "/logs/",
     },

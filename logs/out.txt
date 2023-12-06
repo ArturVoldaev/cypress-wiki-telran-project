@@ -1,21 +1,52 @@
-cypress/e2e/api/crud-pattern-test.cy.js:
-    CRUD PATTERN TEST -> NEGATIVE TEST -> delete-page-negative-api-test 
+cypress\e2e\api\newTest.cy.js:
+    PARSE, BLOCK -> NEGATIVE TEST -> move-page-negative-api-test 
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): get	#pt-login
+        cy:command (K): click
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:UserLogin&returnto=Tel-ran%3ATel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	input[id="wpName1"]
+        cy:command (K): type	PapaTester
+        cy:command (K): get	input[id="wpPassword1"]
+        cy:command (K): type	PapaTesterPapaTester
+        cy:command (K): get	#wpLoginAttempt
+        cy:command (K): click
+        cy:command (K): form sub	--submitting form--
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Tel-ran:Tel-Ran
+        cy:command (K): wait	3000
+        cy:request (K): POST /api.php
+                        Status: 200
+                        Response body: {
+                          "batchcomplete": "",
+                          "query": {
+                            "tokens": {
+                              "csrftoken": "871062a6d529e18254585569aec25b306570a01b+\\"
+                            }
+                          }
+                        }
+        cy:command (K): assert	expected **200** to equal **200**
+                        Actual: 	200
+                        Expected: 	200
+        cy:command (K): assert	expected **301** to be below **1000**
+                        Actual: 	301
+                        Expected: 	1000
         cy:request (K): POST /api.php
                         Status: 200
                         Response body: {
                           "error": {
-                            "code": "missingparam",
-                            "info": "One of the parameters \"title\" and \"pageid\" is required.",
+                            "code": "badtoken",
+                            "info": "Invalid CSRF token.",
                             "*": "See http://wiki.telran-edu.de:8989/api.php for API usage. Subscribe to the mediawiki-api-announce mailing list at &lt;https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/&gt; for notice of API deprecations and breaking changes."
                           }
                         }
         cy:command (K): assert	expected **200** to equal **200**
                         Actual: 	200
                         Expected: 	200
-        cy:command (K): assert	expected **missingparam** to equal **missingparam**
-                        Actual: 	"missingparam"
-                        Expected: 	"missingparam"
-        cy:command (X): assert	expected **659** to be below **600**
-                        Actual: 	659
-                        Expected: 	600
+        cy:command (K): assert	expected **197** to be below **1000**
+                        Actual: 	197
+                        Expected: 	1000
+        cy:command (X): then	function(){}
 

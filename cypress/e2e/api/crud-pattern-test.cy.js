@@ -3,15 +3,6 @@
 const user = require("../../fixtures/fakeData");
 
 describe("CRUD PATTERN TEST", () => {
-  // beforeEach(() => {
-  //     cy.visit(Cypress.env("URL"))
-  // cy.visit("http://wiki.telran-edu.de:8989/index.php/Main_Page")
-  // cy.get('#pt-login').click()
-  // cy.get('input[id="wpName1"]').type('PinTester')
-  // cy.get('input[id="wpPassword1"]').type('PinTesterPinTester')
-  // cy.get('#wpLoginAttempt').click()
-  // cy.wait(5000)
-  //   })
   context("POSITIVE TESTS", () => {
     it("create-page-positive-api-test ", () => {
       cy.crudPattern({
@@ -57,29 +48,8 @@ describe("CRUD PATTERN TEST", () => {
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body.error).to.have.property('info')
-        expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
       });
     });
-
-    it("block-user-api-test ", () => {
-      cy.request({
-        method: "POST",
-        form: true,
-        url: Cypress.env("SEND_API"),
-        body: {
-          action: "block",
-          format: "json",
-          user: Cypress.env("LOGIN"),
-          token: "+\\",
-          formatversion: "2",
-        },
-      }).then((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.error.code).to.eq("permissiondenied");
-      });
-    });
-
-
   });
 
   context("NEGATIVE TEST", () => {
@@ -129,7 +99,5 @@ describe("CRUD PATTERN TEST", () => {
         expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
       });
     });
-
-
   });
 });

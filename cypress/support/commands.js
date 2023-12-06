@@ -25,5 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 require('/cypress/support/api-request/create-page')
+require('/cypress/support/api-request/login-helper')
 
 
