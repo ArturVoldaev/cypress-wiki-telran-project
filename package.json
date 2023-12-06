@@ -12,8 +12,8 @@
     "del-cli": "^5.1.0"
   },
   "scripts": {
-    "start": "npx cypress run --headless",
-    "open-report": "npx marge mochawesome.json --autoOpen --overwrite",
+    "start": "npx cypress run --reporter mochawesome --headless",
+    "open-report": "npx marge mochawesome.json --overwrite",
     "merge-json": "npx mochawesome-merge 'cypress/results/*.json' -o mochawesome.json",
     "remove-old-report": "del-cli ./cypress/results && del-cli mochawesome.json && del-cli mochawesome-report",
     "start-smoke-test": "npm run remove-old-report && npm run start && npm run merge-json && npm run open-report"
