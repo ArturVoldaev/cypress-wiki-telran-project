@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-const user = require("../../fixtures/fakeData");
+const user = require("../fixtures/fakeData");
 
 describe("PARSE, BLOCK, MOVE", () => {
   context("POSITIVE TESTS", () => {

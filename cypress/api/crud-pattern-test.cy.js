@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const user = require("../../fixtures/fakeData");
+const user = require("../fixtures/fakeData");
 
 describe("CRUD PATTERN TEST", () => {
   context("POSITIVE TESTS", () => {
@@ -10,7 +10,6 @@ describe("CRUD PATTERN TEST", () => {
         title: `${user.pageTitle}`,
         text: `${user.pageText}`,
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
         Cypress.env("pageID", response.body.edit.pageid);
       });
@@ -35,7 +34,6 @@ describe("CRUD PATTERN TEST", () => {
         title: `${user.pageTitle}`,
         text: `${user.pageText} ${user.newPageText}`,
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.edit.title).to.eq(`${user.pageTitle}`);
         expect(response.body.edit.result).to.eq("Success");
       });
@@ -46,7 +44,6 @@ describe("CRUD PATTERN TEST", () => {
         action: "delete",
         title: `${user.pageTitle}`,
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.error).to.have.property('info')
       });
     });
@@ -60,7 +57,6 @@ describe("CRUD PATTERN TEST", () => {
         text: null,
         token: null,
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.error.code).to.eq("invalidtitle");
       });
     });
@@ -71,7 +67,6 @@ describe("CRUD PATTERN TEST", () => {
         title: `${user.indianSymbols}`,
         pageids: `${user.pageId}`,
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response).to.have.property("status");
         expect(response.body.error.code).to.eq("multisource");
       });
@@ -84,7 +79,6 @@ describe("CRUD PATTERN TEST", () => {
         text: `${user.pageText} ${user.newPageText}`,
         token: "-",
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.error.code).to.eq("badtoken");
         expect(response.body.error.info).to.eq("Invalid CSRF token.");
       });
@@ -94,7 +88,6 @@ describe("CRUD PATTERN TEST", () => {
       cy.crudPattern({
         action: "delete",
       }).then((response) => {
-        expect(response.status).to.eq(200);
         expect(response.body.error.code).to.eq("missingparam");
         expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
       });

@@ -1,0 +1,61 @@
+cypress\e2e\registration-form\register-new-user.cy.js:
+    register-new-user -> NEGATIVE TEST -> register-new-user-with-short-password-test
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): get	#pt-createaccount
+        cy:command (K): click
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran%3ATel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#wpName2
+        cy:command (K): type	Arnaldo
+        cy:command (K): get	#wpPassword2
+        cy:command (K): type	OBd
+        cy:command (K): get	#wpRetype
+        cy:command (K): type	OBd
+        cy:command (K): get	#wpEmail
+        cy:command (K): type	Marion.Bauch50@yahoo.com
+        cy:command (K): get	#wpRealName
+        cy:command (K): type	Alexandra
+        cy:command (K): get	#wpCreateaccount
+        cy:command (K): click
+            cy:xhr (K): GET http://wiki.telran-edu.de:8989/api.php?action=query&format=json&list=users&ususers=Arnaldo&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en
+                        Status: 200
+        cy:command (K): form sub	--submitting form--
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran:Tel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	.mw-message-box.mw-message-box-error
+        cy:command (X): assert	expected **<div.mw-message-box-error.mw-message-box>** to contain text **Passwords must be at least 8 characters.**, but the text was **Username entered already in use.\nPlease choose a different name.**
+
+    register-new-user -> NEGATIVE TEST -> register-new-user-china-name-test
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): get	#pt-createaccount
+        cy:command (K): click
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran%3ATel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#wpName2
+        cy:command (K): type	中国冠毛犬
+        cy:command (K): get	#wpPassword2
+        cy:command (K): type	bgwcyVaSEuqDxyZ
+        cy:command (K): get	#wpRetype
+        cy:command (K): type	bgwcyVaSEuqDxyZ
+        cy:command (K): get	#wpEmail
+        cy:command (K): type	Marion.Bauch50@yahoo.com
+            cy:xhr (K): GET http://wiki.telran-edu.de:8989/api.php?action=query&format=json&list=users&ususers=%E4%B8%AD%E5%9B%BD%E5%86%A0%E6%AF%9B%E7%8A%AC&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en
+                        Status: 200
+        cy:command (K): get	#wpRealName
+        cy:command (K): type	Alexandra
+        cy:command (K): get	#wpCreateaccount
+        cy:command (K): click
+        cy:command (K): form sub	--submitting form--
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran:Tel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#firstHeading
+        cy:command (X): assert	expected **<h1#firstHeading.firstHeading.mw-first-heading>** to have text **Welcome, 中国冠毛犬!**, but the text was **Create account**
+

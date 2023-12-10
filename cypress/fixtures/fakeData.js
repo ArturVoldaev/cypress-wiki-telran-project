@@ -1,6 +1,19 @@
-const { faker } = require("@faker-js/faker");
+const { faker, fakerZH_CN } = require("@faker-js/faker");
+function makeName(params) {
+  return faker.person.firstName()
+}
 
 module.exports = {
+
+
+  registerNewUser:{
+    login: makeName(),
+    password: faker.internet.password(),
+    shortPassword: faker.internet.password({ length: 3 }),
+    email: faker.internet.email(),
+    realName: faker.person.firstName(),
+    chinaSmybol: fakerZH_CN.animal.dog()
+  },
   pageTitle: faker.commerce.productName(),
   pageText: faker.lorem.paragraphs(3),
   newPageText: faker.lorem.paragraphs(8),

@@ -4,6 +4,7 @@ const logger = require("cypress-terminal-report/src/installLogsPrinter")
 
 module.exports = defineConfig({
   reporter: "mochawesome",
+  //screenshotsFolder:"/",
   reporterOptions: {
     reportFilename: "[status]_[datetime]-[name]-report",
     reportDir: "cypress/results",
@@ -13,8 +14,10 @@ module.exports = defineConfig({
   },
 
   e2e: {
+    specPattern: ['cypress/e2e/**/*.cy.{js,jsx,ts,tsx}', 'cypress/api/**/*.cy.{js,jsx,ts,tsx}'],
     baseUrl: "http://wiki.telran-edu.de:8989",
     setupNodeEvents(on, config) {
+      screenshotOnRunFailure=true;
       const options = {
         outputRoot: config.projectRoot + "/logs/",
         outputTarget: {
@@ -28,6 +31,7 @@ module.exports = defineConfig({
 
       return config;
     },
+
     
 
     env: {
