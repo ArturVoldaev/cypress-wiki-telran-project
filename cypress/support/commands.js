@@ -27,5 +27,6 @@
 require('/cypress/support/api-request/create-page')
 require('/cypress/support/api-request/login-helper')
 require('/cypress/support/api-request/registerNewUser')
+require('/cypress/support/api-request/create-new-page-ui')
 
 

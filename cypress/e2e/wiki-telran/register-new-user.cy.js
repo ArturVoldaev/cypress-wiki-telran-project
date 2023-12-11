@@ -1,20 +1,25 @@
 /// <reference types="cypress" />
 
-const user = require("../../fixtures/fakeData");
+const { faker, fakerZH_CN } = require("@faker-js/faker");
 const assertionHelper = require("../../support/assertionsHelper");
-//import { user, password, email, realName } from user.registerNewUser;
 
-let { login, password, email, realName, shortPassword, chinaSmybol } =
-  user.registerNewUser;
+let login, password, email, realName, shortPassword, chinaSmybol;
+beforeEach(() => {
+  login = faker.person.firstName();
+  password = faker.internet.password();
+  shortPassword = faker.internet.password({ length: 3 });
+  email = faker.internet.email();
+  realName = faker.internet.email();
+  chinaSmybol = fakerZH_CN.animal.dog();
+});
 
-let { shortPassowordError, commonPassordsError, emptyField } =
+let { shortPassowordError, commonPassordsError, emptyField, needValidUserName} =
   assertionHelper.errorsText;
 
 describe("register-new-user", () => {
   context("POSITIVE TEST", () => {
     it("register-new-user-test", () => {
       cy.registerNewUser(login, password, password, email, realName);
-      console.log(login);
       cy.get("#firstHeading").should("have.text", `Welcome, ${login}!`);
       cy.get("#pt-userpage").should("have.text", `${login}`);
     });
@@ -22,13 +27,7 @@ describe("register-new-user", () => {
 
   context("NEGATIVE TEST", () => {
     it("register-new-user-without-login-test", () => {
-      cy.registerNewUser(
-        undefined,
-        password,
-        password,
-        email,
-        realName
-      );
+      cy.registerNewUser(undefined, password, password, email, realName);
       cy.get("#wpName2")
         .invoke("prop", "validationMessage")
         .should((text) => {
@@ -37,7 +36,6 @@ describe("register-new-user", () => {
     });
     it("register-new-user-with-short-password-test", () => {
       cy.registerNewUser(login, shortPassword, shortPassword, email, realName);
-      console.log(login);
       cy.get(".mw-message-box.mw-message-box-error").should(
         "include.text",
         shortPassowordError
@@ -47,7 +45,7 @@ describe("register-new-user", () => {
       cy.registerNewUser(" ", password, password, email, realName);
       cy.get(".mw-message-box-error").should(
         "include.text",
-        "You have not specified a valid username."
+        needValidUserName
       );
     });
     it("register-new-user-china-name-test", () => {

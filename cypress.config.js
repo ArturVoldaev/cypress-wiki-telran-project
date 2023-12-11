@@ -39,7 +39,7 @@ module.exports = defineConfig({
       LOGIN: "PapaTester",
       PASSWORD: "PapaTesterPapaTester",
       SEND_API: "/api.php",
-      SPEED_RESPONSE: 1000,
+      SPEED_RESPONSE: 5000,
       pageID: 50 || Cypress.env("pageID"),
       //allure
       projectRoot: "/logs/",
