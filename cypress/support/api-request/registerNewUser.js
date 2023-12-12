@@ -4,7 +4,7 @@ const registerNewUser = Cypress.Commands.add(
 
 
     cy.visit("/");
-    cy.get('#pt-createaccount').click();
+    //cy.get('#pt-createaccount').click();
     if (login) {
       cy.get('#wpName2').type(login);
     }

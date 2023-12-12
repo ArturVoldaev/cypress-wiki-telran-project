@@ -24,9 +24,21 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-require('/cypress/support/api-request/create-page')
-require('/cypress/support/api-request/login-helper')
-require('/cypress/support/api-request/registerNewUser')
-require('/cypress/support/api-request/create-new-page-ui')
+require("/cypress/support/api-request/create-page");
+require("/cypress/support/api-request/login-helper");
+require("/cypress/support/api-request/registerNewUser");
+require("/cypress/support/api-request/create-new-page-ui");
 
+Cypress.Commands.add("getMyIP", () => {
+  cy.request("https://checkip.amazonaws.com/").then((res) => {
+    return Cypress.env("myIP", res.body.replace(/[\r\n]/gm, ''));
+  });
+});
 
+Cypress.Commands.add("visitMainPage", () => {
+  cy.visit("/");
+});
+
+Cypress.Commands.add("redirectToPage", (pageName) => {
+  pageName.click();
+});

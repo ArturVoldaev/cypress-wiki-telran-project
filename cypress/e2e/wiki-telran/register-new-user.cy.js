@@ -1,57 +1,83 @@
 /// <reference types="cypress" />
 
-const { faker, fakerZH_CN } = require("@faker-js/faker");
-const assertionHelper = require("../../support/assertionsHelper");
+const mainPage = require("../../pages/mainPage");
+const assertionsText = require("../../fixtures/assertionsText");
+const generateData = require("../../fixtures/ui-test");
+const createNewUserPage = require("../../pages/createNewUserPage");
 
 let login, password, email, realName, shortPassword, chinaSmybol;
 beforeEach(() => {
-  login = faker.person.firstName();
-  password = faker.internet.password();
-  shortPassword = faker.internet.password({ length: 3 });
-  email = faker.internet.email();
-  realName = faker.internet.email();
-  chinaSmybol = fakerZH_CN.animal.dog();
+  mainPage.visitMainPage();
+  mainPage.clickOnCreateAccountButton();
+  login = generateData.uiTest.loginNameNewUser();
+  password = generateData.uiTest.passwordNewUser();
+  shortPassword = generateData.uiTest.shortPassword();
+  email = generateData.uiTest.email();
+  realName = generateData.uiTest.realName();
+  chinaSmybol = generateData.uiTest.unknownLetter();
 });
 
-let { shortPassowordError, commonPassordsError, emptyField, needValidUserName} =
-  assertionHelper.errorsText;
+let {
+  shortPassowordError,
+  emptyField,
+  needValidUserName,
+} = assertionsText.errorsText;
 
 describe("register-new-user", () => {
   context("POSITIVE TEST", () => {
     it("register-new-user-test", () => {
-      cy.registerNewUser(login, password, password, email, realName);
-      cy.get("#firstHeading").should("have.text", `Welcome, ${login}!`);
-      cy.get("#pt-userpage").should("have.text", `${login}`);
+      createNewUserPage.createNewUser(
+        login,
+        password,
+        password,
+        email,
+        realName
+      );
+      createNewUserPage.elements
+        .userNameHeader()
+        .should("have.text", `Welcome, ${login}!`);
+      mainPage.elements.userNameButton().should("have.text", `${login}`);
     });
   });
 
   context("NEGATIVE TEST", () => {
     it("register-new-user-without-login-test", () => {
-      cy.registerNewUser(undefined, password, password, email, realName);
-      cy.get("#wpName2")
+      createNewUserPage.createNewUser(
+        undefined,
+        password,
+        password,
+        email,
+        realName
+      );
+      createNewUserPage.elements
+        .userNameInput()
         .invoke("prop", "validationMessage")
         .should((text) => {
           expect(text).to.contain(emptyField);
         });
     });
     it("register-new-user-with-short-password-test", () => {
-      cy.registerNewUser(login, shortPassword, shortPassword, email, realName);
-      cy.get(".mw-message-box.mw-message-box-error").should(
-        "include.text",
-        shortPassowordError
+      createNewUserPage.createNewUser(
+        login,
+        shortPassword,
+        shortPassword,
+        email,
+        realName
       );
+      createNewUserPage.elements
+        .errorBox()
+        .should("include.text", shortPassowordError);
     });
     it("register-new-user-with-space-in-login-test", () => {
-      cy.registerNewUser(" ", password, password, email, realName);
-      cy.get(".mw-message-box-error").should(
-        "include.text",
-        needValidUserName
-      );
+      createNewUserPage.createNewUser(" ", password, password, email, realName);
+      createNewUserPage.elements
+        .errorBox()
+        .should("include.text", needValidUserName);
     });
     it("register-new-user-china-name-test", () => {
-      cy.registerNewUser(chinaSmybol, password, password, email, realName);
-      cy.get("#firstHeading").should("have.text", `Welcome, ${chinaSmybol}!`);
-      cy.get("#pt-userpage").should("have.text", `${chinaSmybol}`);
+      createNewUserPage.createNewUser(chinaSmybol, password, password, email, realName);
+      createNewUserPage.elements.userNameHeader().should("have.text", `Welcome, ${chinaSmybol}!`);
+      mainPage.elements.userNameButton().should("have.text", `${chinaSmybol}`);
     });
   });
 });

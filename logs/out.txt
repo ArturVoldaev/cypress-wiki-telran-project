@@ -1,13 +1,77 @@
-cypress\e2e\wiki-telran\create-new-page.cy.js:
-    create-new-page -> NEGATIVE TEST -> create-page-with-sql-injection-data-test
+cypress\e2e\wiki-telran\register-new-user.cy.js:
+    register-new-user -> POSITIVE TEST -> register-new-user-test
         cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
-        cy:command (K): get	#searchInput
-        cy:command (K): type	Robert'); DROP TABLE Users;--
+        cy:command (K): get	#pt-createaccount
+        cy:command (K): click
         cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Tel-ran:Tel-Ran
-        cy:command (K): get	#searchButton
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran%3ATel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#wpName2
+        cy:command (K): type	Louvenia
+        cy:command (K): get	#wpPassword2
+        cy:command (K): type	GR15eO24m29aRiG
+        cy:command (K): get	#wpRetype
+        cy:command (K): type	GR15eO24m29aRiG
+        cy:command (K): get	#wpEmail
+        cy:command (K): type	Florencio13@yahoo.com
+            cy:xhr (K): GET http://wiki.telran-edu.de:8989/api.php?action=query&format=json&list=users&ususers=Louvenia&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en
+                        Status: 200
+        cy:command (K): get	#wpRealName
+        cy:command (K): type	Bobby
+        cy:command (K): get	#wpCreateaccount
         cy:command (K): click
         cy:command (K): form sub	--submitting form--
         cy:command (K): page load	--page loaded--
-        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Robert%27);_DROP_TABLE_Users;--
-        cy:command (X): get	.new
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:CreateAccount&returnto=Tel-ran:Tel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#firstHeading
+        cy:command (X): assert	expected **<h1#firstHeading.firstHeading.mw-first-heading>** to have text **Welcome, Louvenia!**, but the text was **Create account**
+
+
+
+cypress\e2e\wiki-telran\talk-page-test.cy.js:
+    talk-page-test.cy -> NEGATIVE TEST -> create-new-topic-talk-withOut-data-test
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): get	#pt-login
+        cy:command (K): click
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Tel-ran:Tel-Ran
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:UserLogin&returnto=Tel-ran%3ATel-Ran
+         cons:warn (!): This page is using the deprecated ResourceLoader module "mediawiki.ui".
+                        Please use OOUI instead.
+        cy:command (K): get	#wpName1
+        cy:command (K): type	PapaTester
+        cy:command (K): get	#wpPassword1
+        cy:command (K): type	PapaTesterPapaTester
+        cy:command (K): get	#wpLoginAttempt
+        cy:command (K): click
+        cy:command (K): form sub	--submitting form--
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Tel-ran:Tel-Ran
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): get	#pt-mytalk
+        cy:command (K): click
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Tel-ran:Tel-Ran
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/User_talk:PapaTester
+        cy:request (K): https://checkip.amazonaws.com/
+                        Status: 200
+                        Response body: 172.56.160.224
+        cy:command (K): get	#pt-logout
+        cy:command (K): click
+            cy:xhr (K): POST http://wiki.telran-edu.de:8989/api.php
+                        Status: 200
+        cy:command (K): visit	/ -> 301: http://wiki.telran-edu.de:8989/index.php/Main_Page
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php?title=Special:UserLogout&returnto=User+talk%3APapaTester
+        cy:command (K): get	#pt-anontalk
+        cy:command (K): click
+        cy:command (K): page load	--page loaded--
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/Special:MyTalk
+        cy:command (K): new url	http://wiki.telran-edu.de:8989/index.php/User_talk:172.56.160.224
+        cy:command (K): get	.mw-page-title-main
+        cy:command (X): assert	expected **<span.mw-page-title-main>** to contain text **172.56.160.224\n**, but the text was **172.56.160.224**
 

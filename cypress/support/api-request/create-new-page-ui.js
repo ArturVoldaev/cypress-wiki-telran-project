@@ -51,4 +51,3 @@ const createNewPageSelectors = {
 };
 
 Cypress.env("selectorsForTest", createNewPageSelectors);
-

@@ -20,7 +20,6 @@ beforeEach(() => {
   textForSummary = generateData.uiTest.textForSummary();
   unknownLetter = generateData.uiTest.unknownLetter();
   sqlInjection = generateData.uiTest.sqlInjection();
-  console.log(newPageName);
 });
 
 describe("create-new-page", () => {
