@@ -34,7 +34,9 @@ describe("talk-page-test.cy", () => {
         .should("contain.text", Cypress.env("LOGIN"));
     });
     it("show-unfamiliar-user-topics", () => {
+        cy.wait(2000)
         cy.redirectToPage(mainPage.elements.logOutButton());
+        cy.wait(2000)
         cy.visitMainPage();
         cy.redirectToPage(mainPage.elements.talkButton());
         mainPage.elements.pageTitle().should("contain.text", Cypress.env("myIP"));
