@@ -11,6 +11,8 @@
   },
   "scripts": {
     "cypress:open": "cypress open",
-    "test": "cypress run"
+    "test-in-electron": "cypress run",
+    "test-in-fireFox": "cypress run --browser firefox",
+    "test-in-edge": "cypress run --browser edge"
   }
 }
