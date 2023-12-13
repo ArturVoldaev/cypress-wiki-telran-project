@@ -26,21 +26,21 @@ describe("create-new-page", () => {
   context("POSITIVE TEST", () => {
     it("create-new-page-test", () => {
       mainPage.searchPage(newPageName);
-      searchPage.clickOnButtonCreatePage();
+      cy.redirectToPage(searchPage.elements.createPageButton());
       editPage.inputText(textForTextBox, textForSummary);
       mainPage.elements.pageTitle().should("include.text", newPageName);
       cy.url().should("include", newPageName);
     });
     it("create-new-page-without-descripton-test", () => {
       mainPage.searchPage(newPageName);
-      searchPage.clickOnButtonCreatePage();
+      cy.redirectToPage(searchPage.elements.createPageButton());
       editPage.inputText(undefined, undefined);
-      editPage.submitEditPage();
+      cy.redirectToPage(editPage.elements.saveButton())
       mainPage.elements.pageTitle().should("include.text", newPageName);
     });
     it("edit-page-test", () => {
       mainPage.searchPage(newPageName);
-      searchPage.clickOnButtonCreatePage();
+      cy.redirectToPage(searchPage.elements.createPageButton());
       editPage.inputText(textForTextBox, textForSummary);
       cy.redirectToPage(mainPage.elements.editPageButton());
       editPage.inputText(newTextForTextBox, undefined);
@@ -54,13 +54,13 @@ describe("create-new-page", () => {
   context("NEGATIVE TEST", () => {
     it("create-page-with-china-symbols-test", () => {
       mainPage.searchPage(unknownLetter);
-      searchPage.clickOnButtonCreatePage();
+      cy.redirectToPage(searchPage.elements.createPageButton());
       editPage.inputText(textForTextBox, textForSummary);
       mainPage.elements.pageTitle().should("include.text", unknownLetter);
     });
     it("create-page-with-sql-injection-data-test", () => {
       mainPage.searchPage(sqlInjection);
-      searchPage.clickOnButtonCreatePage();
+      cy.redirectToPage(searchPage.elements.createPageButton());
       editPage.inputText(textForTextBox, textForSummary);
       mainPage.elements.pageTitle().should("include.text", sqlInjection);
     });

@@ -16,11 +16,7 @@ class EditPage {
     if (summaryText) {
       this.elements.summaryBox().type(summaryText);
     }
-    this.submitEditPage();
-  }
-
-  submitEditPage() {
-    this.elements.saveButton().click();
+    cy.redirectToPage(this.elements.saveButton())
   }
 }
 
