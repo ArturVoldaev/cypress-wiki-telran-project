@@ -8,7 +8,7 @@ class GenerateData {
     textForSummary: () => faker.lorem.sentence(),
     unknownLetter: () => fakerZH_CN.animal.dog()+faker.number.int(),
     sqlInjection: () => "Robert'); DROP TABLE "+`User${faker.number.int()}`+";--",
-    loginNameNewUser: () => faker.person.firstName(),
+    loginNameNewUser: () => faker.person.firstName() + faker.number.int(),
     passwordNewUser: () => faker.internet.password(),
     shortPassword: () => faker.internet.password({ length: 3 }),
     email: () => faker.internet.email(),
