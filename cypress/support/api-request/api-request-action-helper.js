@@ -1,4 +1,4 @@
-const createPage = Cypress.Commands.add("crudPattern", (body) => {
+const createPage = Cypress.Commands.add("requestHelper", (body) => {
   let bodyReuest = {
     action: "edit",
     format: "json",
@@ -43,9 +43,9 @@ const createPage = Cypress.Commands.add("crudPattern", (body) => {
       bodyReuest.fromid = body.fromid;
       bodyReuest.to = body.to;
       bodyReuest.reason = body.reason;
-      bodyReuest.token = Cypress.env("TOKEN")
-      bodyReuest.redirectcreated  = false,
-      bodyReuest.moveoverredirect = false
+      bodyReuest.token = Cypress.env("TOKEN");
+      (bodyReuest.redirectcreated = false),
+        (bodyReuest.moveoverredirect = false);
       break;
     default:
   }

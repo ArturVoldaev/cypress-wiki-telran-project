@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
-const user = require("../fixtures/fakeData");
+const user = require("../fixtures/api-tests-fake-data");
 
 describe("PARSE, BLOCK, MOVE", () => {
   context("POSITIVE TESTS", () => {
     it("parse-page-positive-api-test", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "parse",
         title: `${user.pageTitle}`,
         text: `${user.pageText}`,
@@ -14,7 +14,7 @@ describe("PARSE, BLOCK, MOVE", () => {
     });
 
     it("block-user-positive-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "block",
         user: Cypress.env("LOGIN"),
       }).then((response) => {
@@ -24,14 +24,14 @@ describe("PARSE, BLOCK, MOVE", () => {
 
     it("move-page-positive-api-test ", () => {
       cy.logIn();
-      cy.crudPattern({
+      cy.requestHelper({
         action: "query",
         meta: "tokens",
       }).then((response) => {
         Cypress.env("TOKEN", response.body.query.tokens.csrftoken);
       });
 
-      cy.crudPattern({
+      cy.requestHelper({
         action: "move",
         fromid: Cypress.env("pageID"),
         to: `${user.newPageTitle}`,
@@ -46,7 +46,7 @@ describe("PARSE, BLOCK, MOVE", () => {
 
   context("NEGATIVE TEST", () => {
     it("parse-page-negative-api-test", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "parse",
         title: `${user.pageTitle}`,
         text: `${user.pageText}`,
@@ -57,7 +57,7 @@ describe("PARSE, BLOCK, MOVE", () => {
     });
 
     it("block-user-negative-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "block",
         user: Cypress.env("LOGIN"),
         token: "-",
@@ -68,11 +68,11 @@ describe("PARSE, BLOCK, MOVE", () => {
 
     it("move-page-negative-api-test ", () => {
       cy.logIn();
-      cy.crudPattern({
+      cy.requestHelper({
         action: "query",
         meta: "tokens",
       });
-      cy.crudPattern({
+      cy.requestHelper({
         action: "move",
         fromid: Cypress.env("pageID"),
         to: `${user.newPageTitle}`,

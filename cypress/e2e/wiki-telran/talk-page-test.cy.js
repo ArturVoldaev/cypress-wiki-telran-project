@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
-const mainPage = require("../../pages/mainPage");
-const generateData = require("../../fixtures/ui-tests-fake-data");
+const mainPage = require("../../pages/MainPage");
 const logInPage = require("../../pages/LogInPage");
 const talkPage = require("../../pages/TalkPage");
-const editPage = require("../../pages/editPage");
-const assertionsText = require("../../fixtures/assertionsText");
+const editPage = require("../../pages/EditPage");
+const generateData = require("../../fixtures/ui-tests-fake-data");
+const assertionsText = require("../../fixtures/assertions-text-data");
 
 let newTextForTextBox, textForSummary, newSubject, newSubjectText;
 beforeEach(() => {
@@ -57,7 +57,7 @@ describe("talk-page-test.cy", () => {
   });
 
   context("NEGATIVE TEST", () => {
-    it("create-new-topic-talk-withOut-data-test", () => {
+    it("create-new-topic-talk-without-data-test", () => {
       talkPage.createNewTopic();
       editPage.inputText(undefined, undefined);
       editPage.elements

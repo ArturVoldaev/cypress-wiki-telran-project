@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
-const user = require("../fixtures/fakeData");
+const user = require("../fixtures/api-tests-fake-data");
 
 describe("CRUD PATTERN TEST", () => {
   context("POSITIVE TESTS", () => {
     it("create-page-positive-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "edit",
         title: `${user.pageTitle}`,
         text: `${user.pageText}`,
@@ -16,7 +16,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("read-page-positive-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "query",
         title: `${user.pageTitle}`,
       }).then((response) => {
@@ -29,7 +29,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("update-page-positive-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "edit",
         title: `${user.pageTitle}`,
         text: `${user.pageText} ${user.newPageText}`,
@@ -40,7 +40,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("delete-page-positive-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "delete",
         title: `${user.pageTitle}`,
       }).then((response) => {
@@ -51,7 +51,7 @@ describe("CRUD PATTERN TEST", () => {
 
   context("NEGATIVE TEST", () => {
     it("create-page-negative-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "edit",
         title: null,
         text: null,
@@ -62,7 +62,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("read-page-negative-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "query",
         title: `${user.indianSymbols}`,
         pageids: `${user.pageId}`,
@@ -73,7 +73,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("update-page-negative-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "edit",
         title: `${user.pageTitle}`,
         text: `${user.pageText} ${user.newPageText}`,
@@ -85,7 +85,7 @@ describe("CRUD PATTERN TEST", () => {
     });
 
     it("delete-page-negative-api-test ", () => {
-      cy.crudPattern({
+      cy.requestHelper({
         action: "delete",
       }).then((response) => {
         expect(response.body.error.code).to.eq("missingparam");

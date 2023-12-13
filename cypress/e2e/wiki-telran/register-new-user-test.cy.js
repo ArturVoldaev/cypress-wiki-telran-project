@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
-const mainPage = require("../../pages/mainPage");
-const assertionsText = require("../../fixtures/assertionsText");
+const mainPage = require("../../pages/MainPage");
+const assertionsText = require("../../fixtures/assertions-text-data");
 const generateData = require("../../fixtures/ui-tests-fake-data");
-const createNewUserPage = require("../../pages/createNewUserPage");
+const createNewUserPage = require("../../pages/CreateNewUserPage");
 
 let login, password, email, realName, shortPassword, chinaSmybol;
 beforeEach(() => {
   cy.visitMainPage();
-  cy.redirectToPage( mainPage.elements.createNewAccountHeaderButton())
+  cy.redirectToPage(mainPage.elements.createNewAccountHeaderButton())
   login = generateData.uiTest.loginNameNewUser();
   password = generateData.uiTest.passwordNewUser();
   shortPassword = generateData.uiTest.shortPassword();

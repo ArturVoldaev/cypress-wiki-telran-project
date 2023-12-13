@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-const generateData = require("../../fixtures/ui-test");
-const mainPage = require("../../pages/mainPage");
-const searchPage = require("../../pages/searchResultPage");
-const editPage = require("../../pages/editPage");
+const generateData = require("../../fixtures/ui-tests-fake-data");
+const mainPage = require("../../pages/MainPage");
+const searchPage = require("../../pages/SearchResultPage");
+const editPage = require("../../pages/EditPage");
 
 let newPageName,
   textForTextBox,

@@ -1,21 +1,10 @@
 {
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
-    "cypress": "^13.6.0",
-    "mochawesome": "^7.1.3",
-    "mochawesome-merge": "^4.3.0",
-    "mochawesome-report-generator": "^6.2.0",
-    "open-cli": "^7.2.0"
+    "cypress": "^13.6.0"
   },
   "dependencies": {
-    "cypress-terminal-report": "^5.3.9",
-    "del-cli": "^5.1.0"
+    "cypress-terminal-report": "^5.3.9"
   },
-  "scripts": {
-    "start": "npx cypress run --reporter mochawesome --headless",
-    "open-report": "npx marge mochawesome.json --autoOpen --overwrite",
-    "merge-json": "npx mochawesome-merge 'cypress/results/*.json' -o mochawesome.json",
-    "remove-old-report": "del-cli ./cypress/results && del-cli mochawesome.json && del-cli mochawesome-report",
-    "start-smoke-test": "npm run remove-old-report && npm run start && npm run merge-json && npm run open-report"
-  }
+  "scripts": {}
 }
