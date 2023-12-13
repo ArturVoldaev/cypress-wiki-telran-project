@@ -23,7 +23,7 @@ describe("PARSE, BLOCK, MOVE", () => {
     });
 
     it("move-page-positive-api-test ", () => {
-      cy.login();
+      cy.logIn();
       cy.crudPattern({
         action: "query",
         meta: "tokens",
@@ -67,7 +67,7 @@ describe("PARSE, BLOCK, MOVE", () => {
     });
 
     it("move-page-negative-api-test ", () => {
-      cy.login();
+      cy.logIn();
       cy.crudPattern({
         action: "query",
         meta: "tokens",

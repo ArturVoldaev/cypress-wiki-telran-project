@@ -1,7 +1,0 @@
-{
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "email1": "${faker.internet.email()}",
-  "body": "Fixtures are a great way to mock data for responses to routes",
-  "indianSymbols":"एक जल्दी भूरी लोमड़ी आलसी कुत्ते पर कूदता"
-}

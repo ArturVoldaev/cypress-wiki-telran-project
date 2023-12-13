@@ -1,4 +1,4 @@
-class searchResultPage {
+class SearchResultPage {
     elements = {
       createPageButton: () => cy.get('.new'),
     };
@@ -8,4 +8,4 @@ class searchResultPage {
     }
   }
   
-  module.exports = new searchResultPage();
+  module.exports = new SearchResultPage();

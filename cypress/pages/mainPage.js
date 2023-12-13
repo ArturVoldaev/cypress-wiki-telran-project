@@ -1,4 +1,4 @@
-class loginPage {
+class MainPage {
   elements = {
     searchInput: () => cy.get("#searchInput"),
     searchButton: () => cy.get("#searchButton"),
@@ -21,4 +21,4 @@ class loginPage {
 
 }
 
-module.exports = new loginPage();
+module.exports = new MainPage();

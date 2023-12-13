@@ -1,4 +1,4 @@
-class editPage {
+class EditPage {
   elements = {
     saveButton: () => cy.get("#wpSave"),
     textBox: () => cy.get("#wpTextbox1"),
@@ -24,4 +24,4 @@ class editPage {
   }
 }
 
-module.exports = new editPage();
+module.exports = new EditPage();
