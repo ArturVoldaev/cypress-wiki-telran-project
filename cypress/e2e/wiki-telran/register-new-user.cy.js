@@ -2,13 +2,13 @@
 
 const mainPage = require("../../pages/mainPage");
 const assertionsText = require("../../fixtures/assertionsText");
-const generateData = require("../../fixtures/ui-test");
+const generateData = require("../../fixtures/ui-tests-fake-data");
 const createNewUserPage = require("../../pages/createNewUserPage");
 
 let login, password, email, realName, shortPassword, chinaSmybol;
 beforeEach(() => {
-  mainPage.visitMainPage();
-  mainPage.clickOnCreateAccountButton();
+  cy.visitMainPage();
+  cy.redirectToPage( mainPage.elements.createNewAccountHeaderButton())
   login = generateData.uiTest.loginNameNewUser();
   password = generateData.uiTest.passwordNewUser();
   shortPassword = generateData.uiTest.shortPassword();

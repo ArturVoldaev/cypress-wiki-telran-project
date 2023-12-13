@@ -19,25 +19,6 @@ class loginPage {
     this.elements.searchButton().click();
   }
 
-  clickOnEditButton() {
-    this.elements.editPageButton().click();
-  }
-
-  clickOnCreateAccountButton() {
-    this.elements.createNewAccountHeaderButton().click();
-  }
-
-  visitMainPage() {
-    cy.visit("/");
-  }
-
-  visitPage(pageName) {
-    pageName.click()
-  }
-
-  visitLogInPage() {
-    this.elements.logInButton().click()
-  }
 }
 
 module.exports = new loginPage();

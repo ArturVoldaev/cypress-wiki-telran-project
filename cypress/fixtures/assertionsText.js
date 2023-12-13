@@ -6,8 +6,4 @@ module.exports = {
     needValidUserName: "You have not specified a valid username.",
     noSubjectError: "Please enter a comment."
   },
-  
-
-
-
 };

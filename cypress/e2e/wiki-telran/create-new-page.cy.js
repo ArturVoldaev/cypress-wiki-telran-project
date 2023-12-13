@@ -13,7 +13,7 @@ let newPageName,
   unknownLetter;
 
 beforeEach(() => {
-  mainPage.visitMainPage();
+  cy.visitMainPage();
   newPageName = generateData.uiTest.newPageName();
   textForTextBox = generateData.uiTest.textForTextBox();
   newTextForTextBox = generateData.uiTest.newTextForTextBox();
@@ -42,7 +42,7 @@ describe("create-new-page", () => {
       mainPage.searchPage(newPageName);
       searchPage.clickOnButtonCreatePage();
       editPage.inputText(textForTextBox, textForSummary);
-      mainPage.clickOnEditButton();
+      cy.redirectToPage(mainPage.elements.editPageButton());
       editPage.inputText(newTextForTextBox, undefined);
       mainPage.elements.pageTitle().should("include.text", newPageName);
       mainPage.elements

@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 const mainPage = require("../../pages/mainPage");
-const generateData = require("../../fixtures/ui-test");
+const generateData = require("../../fixtures/ui-tests-fake-data");
 const logInPage = require("../../pages/LogInPage");
 const talkPage = require("../../pages/TalkPage");
 const editPage = require("../../pages/editPage");
