@@ -4,7 +4,7 @@ const user = require("../fixtures/api-tests-fake-data");
 
 describe("CRUD PATTERN TEST", () => {
   context("POSITIVE TESTS", () => {
-    it("create-page-positive-api-test ", () => {
+    it("create-page-positive-api-test", () => {
       cy.requestHelper({
         action: "edit",
         title: `${user.pageTitle}`,
@@ -39,18 +39,18 @@ describe("CRUD PATTERN TEST", () => {
       });
     });
 
-    it("delete-page-positive-api-test ", () => {
+    it("delete-page-positive-api-test", () => {
       cy.requestHelper({
         action: "delete",
         title: `${user.pageTitle}`,
       }).then((response) => {
-        expect(response.body.error).to.have.property('info')
+        expect(response.body.error).to.have.property("info");
       });
     });
   });
 
   context("NEGATIVE TEST", () => {
-    it("create-page-negative-api-test ", () => {
+    it("create-page-negative-api-test", () => {
       cy.requestHelper({
         action: "edit",
         title: null,

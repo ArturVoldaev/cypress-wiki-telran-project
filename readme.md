@@ -1,4 +1,4 @@
-# Cypress Wiki Telran Project
+# Wiki Telran Project
 
 ![Project Logo](http://wiki.telran-edu.de:8989/resources/assets/change-your-logo.svg?a60df)
 
@@ -14,6 +14,7 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 - [Configuration](#configuration)
 - [Writing Tests](#writing-tests)
 - [Running Tests](#running-tests)
+- [Test Cases](#test-cases)
 
 ## Installation
 
@@ -34,9 +35,9 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 To use this Cypress framework for testing the Telran Wiki application, follow these steps:
 
 
-1. Configure the test environment [Configuration](see Configuration).
+1. Configure the test environment [Configuration](#configuration).
 2. Write new test cases or modify existing ones in the cypress/api or cypress/e2e folders.
-3. Run the tests [Running Tests](see running-tests).
+3. Run the tests [Running Tests](#running-tests).
 
 ## Folder Structure
 ```
@@ -81,3 +82,6 @@ To run the tests, execute the following command:
 ```IDE terminal
 npm test-headless
 ```
+
+## Test Cases
+The Test cases are hold on this [link](https://docs.google.com/spreadsheets/d/1qcRAGlnZIq_JkyUuIwOsjWCLrSzQHkuD/edit?usp=sharing&ouid=109249197436436788411&rtpof=true&sd=true)
