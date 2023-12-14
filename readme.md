@@ -33,9 +33,10 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 ## Usage
 To use this Cypress framework for testing the Telran Wiki application, follow these steps:
 
-Configure the test environment [Configuration](see #Configuration).
-Write new test cases or modify existing ones in the cypress/api or cypress/e2e folders.
-Run the tests [Running Tests](see #running-tests).
+
+1. Configure the test environment [Configuration](see Configuration).
+2. Write new test cases or modify existing ones in the cypress/api or cypress/e2e folders.
+3. Run the tests [Running Tests](see running-tests).
 
 ## Folder Structure
 ```
