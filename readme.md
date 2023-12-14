@@ -1,10 +1,10 @@
 # Cypress Wiki Telran Project
 
-![Project Logo](path/to/your/logo.png)
+![Project Logo](http://wiki.telran-edu.de:8989/resources/assets/change-your-logo.svg?a60df)
 
 ## Overview
 
-This project is a test automation framework for [Cypress](https://www.cypress.io/) designed for testing a Wiki application developed by Telran. The framework aims to provide a robust and maintainable set of automated tests to ensure the functionality, reliability, and performance of the Wiki application.
+This project is a test automation framework for [Cypress](https://www.cypress.io/) designed for testing a web application http://wiki.telran-edu.de:8989 developed by Telran. The framework aims to provide a robust and maintainable set of automated tests to ensure the functionality, reliability, and performance of the Wiki application.
 
 ## Table of Contents
 
@@ -23,11 +23,11 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
    git clone https://github.com/ArturVoldaev/cypress-wiki-telran-project-.git
 
 2. Navigate to the project folder:
-
+    ```bash
     cd cypress-wiki-telran-project
 
 3. Install dependencies:
-
+    ```bash
     npm install
 
 ## Usage
@@ -77,6 +77,6 @@ Tests are written in JavaScript using Cypress's testing syntax. Organize your te
 
 ## Running Tests
 To run the tests, execute the following command:
-``` Terminal
+```IDE terminal
 npm test-headless
 ```
