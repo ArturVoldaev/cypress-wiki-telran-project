@@ -1,0 +1,6 @@
+cypress\api\request-test.cy.js:
+    PARSE, BLOCK, MOVE -> POSITIVE TESTS -> move-page-positive-api-test 
+
+    PARSE, BLOCK, MOVE -> NEGATIVE TEST -> move-page-negative-api-test 
+        cy:command (X): get	#wpName1
+

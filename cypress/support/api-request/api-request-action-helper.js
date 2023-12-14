@@ -45,9 +45,8 @@ const createPage = Cypress.Commands.add("requestHelper", (body) => {
       bodyReuest.reason = body.reason;
       bodyReuest.token = Cypress.env("TOKEN");
       (bodyReuest.redirectcreated = false),
-        (bodyReuest.moveoverredirect = false);
+      (bodyReuest.moveoverredirect = false);
       break;
-    default:
   }
 
   cy.request({
@@ -56,7 +55,6 @@ const createPage = Cypress.Commands.add("requestHelper", (body) => {
     url: Cypress.env("SEND_API"),
     body: bodyReuest,
   }).then((response) => {
-    console.log(response);
     expect(response.status).to.eq(200);
     expect(response.duration).to.lessThan(Cypress.env("SPEED_RESPONSE"));
   });
