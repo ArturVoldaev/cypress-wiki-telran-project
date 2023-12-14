@@ -15,6 +15,7 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 - [Writing Tests](#writing-tests)
 - [Running Tests](#running-tests)
 - [Test Cases](#test-cases)
+- [Bug Reports](#bug-reports)
 
 ## Installation
 
@@ -85,3 +86,6 @@ npm test-headless
 
 ## Test Cases
 The Test cases are hold on this [link](https://docs.google.com/spreadsheets/d/1qcRAGlnZIq_JkyUuIwOsjWCLrSzQHkuD/edit?usp=sharing&ouid=109249197436436788411&rtpof=true&sd=true)
+
+## Bug Reports
+The bug reports are hold on this [link]https://docs.google.com/spreadsheets/d/1fA9O3ecNn3WlB9SRW_AR7yng_YcAwaET/edit?usp=drive_link&ouid=109249197436436788411&rtpof=true&sd=true
