@@ -41,10 +41,33 @@ describe("CRUD PATTERN TEST", () => {
 
     it("delete-page-positive-api-test", () => {
       cy.requestHelper({
+        action: "query",
+        meta: "tokens",
+        type: "login",
+      }).then((response) => {
+        Cypress.env("LOGIN_TOKEN", response.body.query.tokens.logintoken);
+      });
+
+      cy.requestHelper({
+        action: "login",
+        lgname: Cypress.env("LOGIN"),
+        lgpassword: Cypress.env("PASSWORD"),
+      }).then((response) => {
+        expect(response.body.login.result).to.eq("Success");
+      });
+
+      cy.requestHelper({
+        action: "query",
+        meta: "tokens",
+      }).then((response) => {
+        Cypress.env("TOKEN", response.body.query.tokens.csrftoken);
+      });
+
+      cy.requestHelper({
         action: "delete",
         title: `${user.pageTitle}`,
       }).then((response) => {
-        expect(response.body.error).to.have.property("info");
+        expect(response.body.error.code).to.eq("permissiondenied");
       });
     });
   });
@@ -88,7 +111,7 @@ describe("CRUD PATTERN TEST", () => {
       cy.requestHelper({
         action: "delete",
       }).then((response) => {
-        expect(response.body.error.code).to.eq("missingparam");
+        expect(response.body.error.code).to.eq("badtoken");
         expect(response.duration).to.be.lessThan(Cypress.env("SPEED_RESPONSE"));
       });
     });

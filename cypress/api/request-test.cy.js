@@ -22,24 +22,22 @@ describe("PARSE, BLOCK, MOVE", () => {
       });
     });
 
-    it("move-page-positive-api-test ", () => {
-      cy.logIn();
+    it("logIn-positive-api-test ", () => {
       cy.requestHelper({
         action: "query",
         meta: "tokens",
+        type: "login",
       }).then((response) => {
-        Cypress.env("TOKEN", response.body.query.tokens.csrftoken);
+        Cypress.env("LOGIN_TOKEN", response.body.query.tokens.logintoken);
       });
 
       cy.requestHelper({
-        action: "move",
-        fromid: Cypress.env("pageID"),
-        to: `${user.newPageTitle}`,
-        reason: `${user.renameReason}`,
-        token: Cypress.env("TOKEN"),
+        action: "login",
+        lgname: Cypress.env("LOGIN"),
+        lgpassword: Cypress.env("PASSWORD"),
       }).then((response) => {
-        expect(response.body.move.to).to.eq(`${user.newPageTitle}`);
-        expect(response.body.move.reason).to.eq(`${user.renameReason}`);
+        expect(response.body.login.result).to.eq("Success");
+        expect(response.body.login.lgusername).to.eq(Cypress.env("LOGIN"));
       });
     });
   });
@@ -66,20 +64,20 @@ describe("PARSE, BLOCK, MOVE", () => {
       });
     });
 
-    it("move-page-negative-api-test ", () => {
-      cy.logIn();
+    it("logIn-negative-api-test ", () => {
       cy.requestHelper({
         action: "query",
         meta: "tokens",
-      });
-      cy.requestHelper({
-        action: "move",
-        fromid: Cypress.env("pageID"),
-        to: `${user.newPageTitle}`,
-        reason: `${user.renameReason}`,
-        token: Cypress.env("TOKEN"),
+        type: "login",
       }).then((response) => {
-        expect(response.body.error.code).to.eq("badtoken");
+        Cypress.env("LOGIN_TOKEN", response.body.query.tokens.logintoken);
+      });
+
+      cy.requestHelper({
+        action: "login",
+        lgname: Cypress.env("LOGIN"),
+      }).then((response) => {
+        expect(response.body.login.result).to.eq("Failed");
       });
     });
   });

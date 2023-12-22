@@ -18,12 +18,14 @@ const createPage = Cypress.Commands.add("requestHelper", (body) => {
       }
       if (body.meta) {
         bodyReuest.meta = body.meta;
+        bodyReuest.type = body.type;
         delete bodyReuest.token;
       }
       break;
     case "delete":
       bodyReuest.action = "delete";
       bodyReuest.title = body.title;
+      bodyReuest.token = Cypress.env("TOKEN");
       break;
     case "parse":
       bodyReuest.action = "parse";
@@ -38,14 +40,12 @@ const createPage = Cypress.Commands.add("requestHelper", (body) => {
       bodyReuest.action = "block";
       bodyReuest.user = body.user;
       break;
-    case "move":
-      bodyReuest.action = "move";
-      bodyReuest.fromid = body.fromid;
-      bodyReuest.to = body.to;
-      bodyReuest.reason = body.reason;
-      bodyReuest.token = Cypress.env("TOKEN");
-      (bodyReuest.redirectcreated = false),
-      (bodyReuest.moveoverredirect = false);
+    case "login":
+      bodyReuest.action = "login";
+      bodyReuest.lgname = body.lgname;
+      bodyReuest.lgpassword = body.lgpassword;
+      delete bodyReuest.token;
+      bodyReuest.lgtoken = Cypress.env("LOGIN_TOKEN");
       break;
   }
 
@@ -55,6 +55,7 @@ const createPage = Cypress.Commands.add("requestHelper", (body) => {
     url: Cypress.env("SEND_API"),
     body: bodyReuest,
   }).then((response) => {
+    console.log(response);
     expect(response.status).to.eq(200);
     expect(response.duration).to.lessThan(Cypress.env("SPEED_RESPONSE"));
   });
