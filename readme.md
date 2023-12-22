@@ -87,10 +87,7 @@ Tests are written in JavaScript using Cypress's testing syntax. Organize your te
 
 ## Running Tests
 To run the tests, execute the following command:
-Setup depencies:
-```IDE terminal
-npm install
-```
+
 Run tests in headless mode:
 ```IDE terminal
 npm run test-headless
