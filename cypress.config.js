@@ -1,6 +1,5 @@
 const { defineConfig } = require("cypress");
 const logger = require("cypress-terminal-report/src/installLogsPrinter")
-const reporterPlugin = require('cypress-mochawesome-reporter/plugin');
 
 
 module.exports = defineConfig({
@@ -22,7 +21,7 @@ module.exports = defineConfig({
       };
       
       logger(on, options);
-       return config;
+      return config;
     },
     env: {
       URL: "http://wiki.telran-edu.de:8989",

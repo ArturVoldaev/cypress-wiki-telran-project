@@ -8,6 +8,7 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 
 ## Table of Contents
 
+- [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
@@ -16,6 +17,13 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 - [Running Tests](#running-tests)
 - [Test Cases](#test-cases)
 - [Bug Reports](#bug-reports)
+
+## Tech stack
+  - Cypress v. 13.6.0
+  - Cypress-multi-reportes v. 1.4.0
+  - Mocha-junit-reporter v. 2.0.0  
+  - Cypress-mochawesome-reporter v. 3.7.0
+  - Cypress-terminal-report v. 5.3.9
 
 ## Installation
 
@@ -34,7 +42,6 @@ This project is a test automation framework for [Cypress](https://www.cypress.io
 
 ## Usage
 To use this Cypress framework for testing the Telran Wiki application, follow these steps:
-
 
 1. Configure the test environment [Configuration](#configuration).
 2. Write new test cases or modify existing ones in the cypress/api or cypress/e2e folders.
@@ -80,6 +87,11 @@ Tests are written in JavaScript using Cypress's testing syntax. Organize your te
 
 ## Running Tests
 To run the tests, execute the following command:
+Setup depencies:
+```IDE terminal
+npm install
+```
+Run tests in headless mode:
 ```IDE terminal
 npm run test-headless
 ```
